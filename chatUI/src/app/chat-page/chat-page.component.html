@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-2" style="padding: 0px;">
+        <div style="background-color: #29373f;height: 50px;">
+            <h5 style="text-align: center;padding:10px; color:whitesmoke">{{socketService.room}}</h5>
+        </div>
+
+        <div>
+            <h4 style="text-align: center; color:whitesmoke">Users</h4>
+            <div  style="text-align: center"*ngFor="let user of socketService.users">
+                <span style="color:whitesmoke">{{user.username}}</span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-10" style="padding: 0px;">
+        <div class="card">
+            <div class="card-header" [routerLink]="['']" style="cursor: pointer;">LetsChat</div>
+            <div class="card-body" >
+              <div style="overflow-y: scroll; height:400px;">
+                 <div id="messages" class="chatbubble" *ngFor="let chat of socketService.chatArray" > 
+                   <div> 
+                       <small style="margin-left:6px">{{chat.username}}</small>
+                   </div>
+                    <small *ngIf="socketService.chatLocation.indexOf(chat) >= 0"  >
+                      <a  style="margin-left:6px" href="{{chat.location}}"> My Current Location</a> {{chat.createdAt}} 
+                    </small>
+                    <small *ngIf="socketService.chatLocation.indexOf(chat) < 0" style="margin-left:6px; font-size: 100%">{{chat.text}}
+                         <small style="font-size: 72%;font-weight: 400;">{{chat.createdAt}}</small> 
+                    </small>
+                 </div>
+              </div>
+        </div>
+</div>
+
+<div class="row" style="margin-top:10px" >
+    <div class="col-md-9">
+        <input id='title'  class="form-control"  placeholder="Type Message here..." [(ngModel)]="text"
+        required>
+    </div>
+    <div class="col-md-3">
+        <button  (click)="increment()" [disabled]="socketService.disable"
+            type="button" class="btn btn-info" style="">
+            Send
+       </button>
+
+        <button style="margin-left:20px"(click)='getLocation()'  [disabled]="socketService.disable"
+            type="button" class="btn btn-success">
+            Location
+        </button>
+</div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,9 @@
+.card {
+    height: 80vh;
+  }
+.chatbubble{
+  background-color: bisque;
+  border-radius: 12px;
+  width: 50%;
+  margin-bottom: 11px;
+}  
